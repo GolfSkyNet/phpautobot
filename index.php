@@ -26,7 +26,7 @@ if(!is_null($events['events'])){
 
 			switch ($event['message']['type']) {
 
-				/* send image
+				/* send image */
 				case 'image':
 
 					$messageID=$event['message']['id'];
@@ -39,7 +39,7 @@ if(!is_null($events['events'])){
 					$respMessage='Please send image only';
 
 					break;
-				*/
+				
 
 				case 'sticker':
 					$messageID=$event['message']['packageId'];
