@@ -29,10 +29,12 @@ if (!is_null($events['events'])) {
                 
                 case 'location':
 
-                    $address = $event['message']['address']['latitude']['longitude'];
+                    $address = $event['message']['address'];
+                    $latitude = $event['message']['latitude'];
+                    $longitude = $event['message']['longitude'];
 
                     // Reply message
-                    $respMessage = 'Hello, your address is '. $address;
+                    $respMessage = 'Hello, your address is '. $address. $latitude. $longitude;
             
                     break;
 
