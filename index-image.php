@@ -26,7 +26,6 @@ if(!is_null($events['events'])){
 
 			switch ($event['message']['type']) {
 
-				/* send image
 				case 'image':
 
 					$messageID=$event['message']['id'];
@@ -38,18 +37,6 @@ if(!is_null($events['events'])){
 
 					$respMessage='Please send image only';
 
-					break;
-				*/
-
-				case 'sticker':
-					$messageID=$event['message']['packageId'];
-					//Replay message
-					$respMessage='Hello, your Sticker Package ID is '.$messageID;
-					break;
-					
-				default:
-					//Replay message
-					$respMessage='Please send Sticker only';
 					break;
 			}
 
