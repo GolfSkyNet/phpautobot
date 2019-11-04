@@ -29,7 +29,7 @@ if (!is_null($events['events'])) {
                 
                 case 'location':
 
-                    $address = $event['message']['latitude'];
+                    $address = $event['message']['title'];
 
                     // Reply message
                     $respMessage = 'Hello, your address is '. $address;
