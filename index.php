@@ -29,7 +29,7 @@ if (!is_null($events['events'])) {
                 
                 case 'location':
 
-                    $address = $event['message']['address'];
+                    $address = $event['message']['latitude'];
 
                     // Reply message
                     $respMessage = 'Hello, your address is '. $address;
@@ -43,7 +43,7 @@ if (!is_null($events['events'])) {
 
                     break;
             }
-            
+
             $httpClient = new CurlHTTPClient($channel_token);
             $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
             $textMessageBuilder = new TextMessageBuilder($respMessage);
