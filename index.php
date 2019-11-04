@@ -26,7 +26,7 @@ if(!is_null($events['events'])){
 
 			switch ($event['message']['type']) {
 
-				/* send image */
+				/* send image
 				case 'image':
 
 					$messageID=$event['message']['id'];
@@ -39,8 +39,10 @@ if(!is_null($events['events'])){
 					$respMessage='Please send image only';
 
 					break;
-				
+				*/
 
+
+				/* Sticker
 				case 'sticker':
 					$messageID=$event['message']['packageId'];
 					//Replay message
@@ -51,6 +53,30 @@ if(!is_null($events['events'])){
 					//Replay message
 					$respMessage='Please send Sticker only';
 					break;
+				*/
+
+				/* Video */
+				case 'video':
+					$messageID=$event['message']['id'];
+
+					//Create video file on server
+					$fileID=$event['message']['id'];
+					$response=$bot->getMessageContent($fileID);
+					$fileName='linebot.mp4';
+					$file=fopen($fileName, 'w');
+					fwrite($file, $response->getRawBody());
+
+					//Reply message
+					$respMessage='Hello, your video ID is '.$messageID;
+
+					break;
+					
+				default:
+					//Replay message
+					$respMessage='Please send video only';
+					break;
+
+
 			}
 
 			$httpClient = new CurlHTTPClient($channel_token);
