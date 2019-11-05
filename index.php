@@ -34,7 +34,7 @@ if (!is_null($events['events'])) {
                     $longitude = $event['message']['longitude'];
 
                     // Reply message
-                    $respMessage = 'Hello, your address is '. $address. $latitude. $longitude;
+                    $respMessage = 'Hello, your address is '. $address. ' '. $latitude. ' '. $longitude;
             
                     break;
 
