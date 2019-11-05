@@ -14,43 +14,32 @@ $channel_secret ='63219f8490cb174ce6fd928c5c188ca0';
 // Get message from Line API
 $content = file_get_contents('php://input');
 $events = json_decode($content, true);
+
 if (!is_null($events['events'])) {
 
     // Loop through each event
     foreach ($events['events'] as $event) {
     
-        // Line API send a lot of event type, we interested in message only.
-        if ($event['type'] == 'message') {
-
-            // Get replyToken
-            $replyToken = $event['replyToken'];
-            
-            switch($event['message']['type']) {
-                
-                case 'location':
-
-                    $address = $event['message']['address'];
-                    $latitude = $event['message']['latitude'];
-                    $longitude = $event['message']['longitude'];
-
-                    // Reply message
-                    $respMessage = 'Hello, your address is '. $address. ' '. $latitude. ' '. $longitude;
-            
-                    break;
-
-                default:
-
-                    // Reply message
-                    $respMessage = 'Please send location only';
-
-                    break;
-            }
-
-            $httpClient = new CurlHTTPClient($channel_token);
-            $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
-            $textMessageBuilder = new TextMessageBuilder($respMessage);
-            $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+        // Get replyToken
+        $replyToken = $event['replyToken'];
+        $ask = $event['message']['text'];
+        switch(strtolower($ask)) {
+            case 'm':
+                $respMessage = 'What sup man. Go away!';
+                break;
+            case 'f':
+                $respMessage = 'Love you lady.';
+                break;
+            default:
+                $respMessage = 'What is your sex? M or F';
+                break;    
         }
+        
+        $httpClient = new CurlHTTPClient($channel_token);
+        $bot = new LINEBot($httpClient, array('channelSecret' => $channel_secret));
+        $textMessageBuilder = new TextMessageBuilder($respMessage);
+        $response = $bot->replyMessage($replyToken, $textMessageBuilder);
+        
     }
 }
 echo "OK";
